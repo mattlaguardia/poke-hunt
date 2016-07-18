@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <meta charset="utf-8">
+  <title>Poke Hunt</title>
+  <!-- styles -->
+  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.6/yeti/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-fixed-top navbar-default">
+      <div class="container-fluid">
+        <a class="navbar-text" href="#">Poke Hunt</a>
+        <p class="navbar-right navbar-text">
+          <a href="#/login" ng-hide="authenticated">Login</a> or <a href="#/register">Register</a></p>
+          <a href="#" ng-show="authenticated" ng-click="signout()">Logout</a>
+          <a ng-show="authenticated">Signed in as {{current_user}}</a>
+        </p>
+      </div>
+    </nav>
+
+  <div class="container">
+    <div ng-view></div>
+  </div>
+
+  <!-- scripts -->
+  <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
+  <script src="./main.js"></script>
+  <script src="./services.js"></script>
+  <script src="./controllers.js"></script>
+
+</body>
+</html>
