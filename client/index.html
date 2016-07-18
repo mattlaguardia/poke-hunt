@@ -2,6 +2,7 @@
 <html ng-app="myApp">
 
 <head>
+  <meta name="viewport" content="initial-scale=1.0">
   <meta charset="utf-8">
   <title>Poke Hunt</title>
   <!-- styles -->
@@ -23,12 +24,15 @@
   <div class="container angular-view-div">
     <div ng-view></div>
   </div>
-
   <!-- scripts -->
+
   <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
+  <script src="//rawgit.com/angular-ui/angular-google-maps/2.1.5/dist/angular-google-maps.min.js"></script>
+  <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
   <script src="./main.js"></script>
   <script src="./services.js"></script>
   <script src="./controllers.js"></script>

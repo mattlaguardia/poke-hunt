@@ -1,8 +1,13 @@
-@media(max-width:425px)
-
 .navbar-right {
   padding-right: 15px;
 }
 .angular-view-div {
+  padding-top: 45px;
+}
+.angular-google-map-container {
+  height: 400px;
+  padding-top: 45px;
+}
+.logout-button {
   padding-top: 45px;
 }
