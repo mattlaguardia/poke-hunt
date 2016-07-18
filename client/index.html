@@ -5,10 +5,11 @@
   <meta charset="utf-8">
   <title>Poke Hunt</title>
   <!-- styles -->
-  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.6/yeti/bootstrap.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-  <nav class="navbar navbar-fixed-top navbar-default">
+  <nav class="navbar-inverse navbar-fixed-top navbar-default">
       <div class="container-fluid">
         <a class="navbar-text" href="#">Poke Hunt</a>
         <p class="navbar-right navbar-text">
@@ -19,7 +20,7 @@
       </div>
     </nav>
 
-  <div class="container">
+  <div class="container angular-view-div">
     <div ng-view></div>
   </div>
 
@@ -32,5 +33,5 @@
   <script src="./services.js"></script>
   <script src="./controllers.js"></script>
 
-</body>
+  </body>
 </html>

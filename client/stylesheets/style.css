@@ -1,0 +1,8 @@
+@media(max-width:425px)
+
+.navbar-right {
+  padding-right: 15px;
+}
+.angular-view-div {
+  padding-top: 45px;
+}
