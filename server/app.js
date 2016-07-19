@@ -19,7 +19,8 @@ var Yelp = require('./yelp.js')
 
 // create instance of express
 var app = express();
-
+// connect to db models
+// var db = require('./models');
 // require routes
 var routes = require('./routes/api.js');
 

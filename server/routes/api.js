@@ -1,7 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+// var yelpInfo = require('../yelpdb');
 var User = require('../models/user.js');
+// var PokeStop = require('../models/yelpInfo.js');
+
+// router.post('/yelp', function(req,res){
+//   console.log(yelpdb);
+//   return req.send(yelbdb).json
+// );
 
 router.post('/register', function(req, res) {
   User.register(new User({ username: req.body.username }),

@@ -1,7 +1,17 @@
 ////////////////////////
 //// GOOGLE MAPS
 ////////////////////////
-angular.module("myApp").controller("mapController", function($scope, $interval, uiGmapGoogleMapApi) {
+angular.module("myApp").controller("mapController", function($scope, $http, $interval, uiGmapGoogleMapApi) {
+  var iconimg = {
+        url: 'http://vignette2.wikia.nocookie.net/pokemon/images/1/13/Poke_Ball_Sprite.png/revision/20151205192135'
+    }
+  $scope.loadYelp = function(){
+    $http.get('server/yelpdb')
+      .success(function(response){
+        console.log(response);
+      })
+  }
+
   angular.extend($scope, {
     map: {
       center: {
@@ -17,10 +27,17 @@ angular.module("myApp").controller("mapController", function($scope, $interval, 
           var lon = e.latLng.lng();
           var marker = {
             id: Date.now(),
+            icon: iconimg,
             coords: {
               latitude: lat,
               longitude: lon
-            }
+            },
+             options: {
+               labelContent : 'HI BEN',
+               labelAnchor: "16 33",
+               labelClass: 'labelClass',
+               labelStyle: {opacity: 0.75}
+             }
           };
           $scope.map.markers.push(marker);
           console.log($scope.map.markers);

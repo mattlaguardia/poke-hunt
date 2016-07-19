@@ -12,3 +12,9 @@
 .logout-button {
   padding-top: 45px;
 }
+.comment-box {
+  padding-top: 25px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

@@ -1,6 +1,12 @@
 <div class="angular-google-map-container" ng-controller="mapController">
-  <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" events="map.events">
+  <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" options="options" events="map.events">
     <!-- <marker position="San Francisco"></marker> -->
-    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" labelContent="m.labelContent"></ui-gmap-marker>
   </ui-gmap-google-map>
+</div>
+<div class="container comment-box">
+  <form method="post">
+    <textarea name="name" rows="6" cols="40" placeholder="Comment"></textarea><br>
+    <input type="submit" name="name" value="Submit" class="btn">
+  </form>
 </div>
