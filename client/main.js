@@ -10,6 +10,7 @@ myApp.config(function (uiGmapGoogleMapApiProvider, $routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'partials/map.html',
+      controller: 'mapController',
       access: {restricted: true}
     })
     .when('/login', {
