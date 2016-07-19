@@ -9,13 +9,13 @@ var hash = require('bcrypt-nodejs');
 var path = require('path');
 var passport = require('passport');
 var localStrategy = require('passport-local' ).Strategy;
+var Yelp = require('yelp');
 
 // mongoose
 mongoose.connect('mongodb://localhost/poke-hunt');
 
 // user schema/model
 var User = require('./models/user.js');
-var Yelp = require('./yelp.js')
 
 // create instance of express
 var app = express();
@@ -51,7 +51,7 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'));
 });
 
-// error hndlers
+error hndlers
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
@@ -64,6 +64,28 @@ app.use(function(err, req, res) {
     message: err.message,
     error: {}
   }));
+});
+
+app.get('/api', function(req, res) {
+  var yb = [];
+  var yelp = new Yelp({
+    consumer_key: '...',
+    consumer_secret: '...',
+    token: '...',
+    token_secret: '...',
+  });
+
+  // See http://www.yelp.com/developers/documentation/v2/search_api
+  yelp.search({ term: 'pokestop', location: 'San Francisco' })
+  .then(function (data) {
+    temp = data.businesses;
+    yb.push(temp);
+    console.log(yb);
+    res.send(yb);
+  })
+  .catch(function (err) {
+    console.error(err);
+  });
 });
 
 

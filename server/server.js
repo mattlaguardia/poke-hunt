@@ -1,12 +1,8 @@
 var debug = require('debug')('passport-mongo');
 var app = require('./app');
-
+var ejs = require('ejs');
 
 app.set('port', process.env.PORT || 3000);
-
-app.get('/', function(req, res) {
-  res.render("index");
-});
 
 app.listen(app.get("port"), function() {
     process.on('uncaughtException', function (err) {
