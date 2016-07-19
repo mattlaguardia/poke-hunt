@@ -2,14 +2,14 @@ var myApp = angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps']);
 
 myApp.config(function (uiGmapGoogleMapApiProvider, $routeProvider) {
   uiGmapGoogleMapApiProvider.configure({
-        key: 'APIKEY',
-        v: '3.20'
+        key: '...',
+        v: '3.20',
         libraries: 'weather,geometry,visualization'
     });
 
   $routeProvider
     .when('/', {
-      templateUrl: 'partials/home.html',
+      templateUrl: 'partials/map.html',
       access: {restricted: true}
     })
     .when('/login', {
@@ -27,8 +27,8 @@ myApp.config(function (uiGmapGoogleMapApiProvider, $routeProvider) {
       controller: 'registerController',
       access: {restricted: false}
     })
-    .when('/one', {
-      templateUrl: 'partials/map.html',
+    .when('/home', {
+      templateUrl: 'partials/home.html',
       access: {restricted: true}
     })
     .when('/two', {

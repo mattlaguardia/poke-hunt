@@ -15,6 +15,7 @@ mongoose.connect('mongodb://localhost/poke-hunt');
 
 // user schema/model
 var User = require('./models/user.js');
+var Yelp = require('./yelp.js')
 
 // create instance of express
 var app = express();
@@ -63,5 +64,6 @@ app.use(function(err, req, res) {
     error: {}
   }));
 });
+
 
 module.exports = app;

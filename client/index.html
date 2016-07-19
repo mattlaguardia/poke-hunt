@@ -14,16 +14,20 @@
       <div class="container-fluid">
         <a class="navbar-text" href="#">Poke Hunt</a>
         <p class="navbar-right navbar-text">
-          <a href="#/login" ng-hide="authenticated">Login</a> or <a href="#/register">Register</a></p>
-          <a href="#" ng-show="authenticated" ng-click="signout()">Logout</a>
-          <a ng-show="authenticated">Signed in as {{current_user}}</a>
+          <a href="#/login" ng-hide="isAuthenticated">Login</a> or <a href="#/register">Register</a></p>
+          <!-- <a href="#" ng-show="isAuthenticated" ng-click="signout()">Logout</a>
+          <a ng-show="isAuthenticated">Signed in as {{current_user}}</a> -->
         </p>
+
       </div>
     </nav>
 
-  <div class="container angular-view-div">
+  <div class="angular-view-div">
     <div ng-view></div>
   </div>
+
+
+
   <!-- scripts -->
 
   <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
@@ -31,8 +35,9 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
   <script src="//rawgit.com/angular-ui/angular-google-maps/2.1.5/dist/angular-google-maps.min.js"></script>
-  <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCT5oj-Jg9aqi2AkIzxTvttWhDgXdxAHh0&extension=.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+  <!-- <script src="./location.js"></script> -->
   <script src="./main.js"></script>
   <script src="./services.js"></script>
   <script src="./controllers.js"></script>
