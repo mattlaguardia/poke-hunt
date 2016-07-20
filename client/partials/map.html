@@ -1,3 +1,12 @@
+<nav class="navbar-inverse navbar-fixed-top navbar-default" ng-controller="logoutController">
+    <div class="container-fluid">
+      <a class="navbar-text" href="#">Poke Hunt</a>
+      <p class="navbar-right navbar-text">
+        <a href="/" class="navbar-links" ng-click="logout()">Logout</a>
+        <!-- <a ng-show="isAuthenticated">Signed In {{current_user}}</a> -->
+      </p>
+    </div>
+  </nav>
 <!-- GOOGLE MAP -->
 <div class="angular-google-map-container" ng-controller="mapController">
   <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" options="options" events="map.events">
@@ -19,9 +28,10 @@
     <form class="form-inline" method="post">
       <div class="form-group">
         <input class="form-control" placeholder="Pokemon Caught" ng-model="text"></input>
+        <input class="form-control" placeholder="Comment" ng-model="text"></input>
       </div>
       <div class="form-group">
-        <input type="submit" name="name" value="Submit" class="btn"></input>
+        <input type="submit" name="name" value="Submit" class="btn submit-button"></input>
       </div>
     </form>
   </div>

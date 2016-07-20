@@ -1,5 +1,12 @@
+body {
+  background-color: #FFFFFE;
+}
 .navbar-right {
   padding-right: 32px;
+
+}
+.navbar-links {
+  color: #D64D4D;
 }
 .angular-view-div {
   padding-top: 45px;
@@ -7,7 +14,10 @@
 .angular-google-map-container {
   height: 400px;
   width: 100%;
-
+}
+.submit-button {
+  background-color: #00A388;
+  color: ghostwhite;
 }
 .logout-button {
   padding-top: 45px;
@@ -17,6 +27,8 @@
   align-items: center;
   display: flex;
   justify-content: center;
+  background-color: #D64D4D;
+  padding-bottom: 25px;
 }
 .pokestops-list {
   padding-top: 20px;

@@ -3,12 +3,11 @@
 ////////////////////////
 angular.module("myApp").controller("mapController", function($scope, $http, $interval, uiGmapGoogleMapApi) {
 
-  $scope.text = '';
-
   var pokeBall = {
     url: 'http://vignette2.wikia.nocookie.net/pokemon/images/1/13/Poke_Ball_Sprite.png/revision/20151205192135'
   }
   var pokeStop = {url: "https://ucarecdn.com/7e2ebe0a-cfe6-470b-b2fd-c474f124b0c4/pokestopnew.png"}
+  
 //////////////////////////
 //// AJAX TO VARIABLE
 //////////////////////////
@@ -61,7 +60,7 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
         var lat = e.latLng.lat();
         var lon = e.latLng.lng();
         var marker = {
-          id: Date.now(),
+          id: "Pokemon Caught ID: " + Date.now(),
           icon: pokeBall,
           latitude: lat,
           longitude: lon,
@@ -152,3 +151,13 @@ angular.module('myApp').controller('registerController',
       });
     };
 }]);
+///////////////////////
+//// LOGGED IN ?
+///////////////////////
+// angular.module('myApp').controller('loggedController', function($scope, AuthService){
+//   if(user){
+//     $scope.user = true;
+//   } else {
+//     $scope.user = false;
+//   }
+// });
