@@ -18,3 +18,14 @@
   display: flex;
   justify-content: center;
 }
+.pokestops-list {
+  padding-top: 20px;
+}
+.pokestop {
+  align-items: center;
+  display: flex;
+  /*justify-content: center;*/
+}
+.selected {
+  background: #ddd;
+}

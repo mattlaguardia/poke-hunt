@@ -21,12 +21,13 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
         var templat = $scope.pokestops[i].location.coordinate.latitude;
         var templng = $scope.pokestops[i].location.coordinate.longitude;
         var id = $scope.pokestops[i].id;
-        $scope.name = $scope.pokestops[i].name;
+        var name = $scope.pokestops[i].name;
+        var location = $scope.pokestops[i].location.display_address[0]
         var marker = {
-          'id': id,
+          'id': name,
           latitude: templat,
           longitude: templng,
-          title: "Hi Ben",
+          title: location,
           icon: pokeStop,
         }
         $scope.map.markers.push(marker);
@@ -72,7 +73,8 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
       }
     }
   }
-});
+})
+.controller('templateController', function(){});
 //////////////////////
 //// LOGIN CTRL
 //////////////////////
