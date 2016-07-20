@@ -19,9 +19,6 @@ var User = require('./models/user.js');
 
 // create instance of express
 var app = express();
-// connect to db models
-// var db = require('./models');
-// require routes
 var routes = require('./routes/api.js');
 
 // define middleware
@@ -51,21 +48,6 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'));
 });
 
-error hndlers
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-app.use(function(err, req, res) {
-  res.status(err.status || 500);
-  res.end(JSON.stringify({
-    message: err.message,
-    error: {}
-  }));
-});
-
 app.get('/api', function(req, res) {
   var yb = [];
   var yelp = new Yelp({
@@ -76,7 +58,7 @@ app.get('/api', function(req, res) {
   });
 
   // See http://www.yelp.com/developers/documentation/v2/search_api
-  yelp.search({ term: 'pokestop', location: 'San Francisco' })
+  yelp.search({ term: 'pokestop', location: 'San Francisco'})
   .then(function (data) {
     temp = data.businesses;
     yb.push(temp);

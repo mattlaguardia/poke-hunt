@@ -22,14 +22,16 @@ angular.module('myApp').factory('AuthService',
       }
     }
 
-    function getUserStatus() {
+    function getUserStatus($scope) {
       return $http.get('/user/status')
       // handle success
       .success(function (data) {
         if(data.status){
           user = true;
+          // $scope.userStatus = user;
         } else {
           user = false;
+          // $scope.userStatus = user;
         }
       })
       // handle error

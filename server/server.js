@@ -1,6 +1,5 @@
 var debug = require('debug')('passport-mongo');
 var app = require('./app');
-var ejs = require('ejs');
 
 app.set('port', process.env.PORT || 3000);
 

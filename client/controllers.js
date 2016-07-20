@@ -3,34 +3,57 @@
 ////////////////////////
 angular.module("myApp").controller("mapController", function($scope, $http, $interval, uiGmapGoogleMapApi) {
 
+  $scope.text = '';
+
   var pokeBall = {
     url: 'http://vignette2.wikia.nocookie.net/pokemon/images/1/13/Poke_Ball_Sprite.png/revision/20151205192135'
   }
-
+  var pokeStop = {url: "https://ucarecdn.com/7e2ebe0a-cfe6-470b-b2fd-c474f124b0c4/pokestopnew.png"}
+//////////////////////////
+//// AJAX TO VARIABLE
+//////////////////////////
   $http.get('http://localhost:3000/api')
     .then(function(response){
       $scope.pokestops = response.data[0];
-      for(var i =0; i < $scope.pokestops.length; i++){
+      console.log($scope.pokestops)
+
+      for(var i = 0; i < $scope.pokestops.length; i++){
         var templat = $scope.pokestops[i].location.coordinate.latitude;
         var templng = $scope.pokestops[i].location.coordinate.longitude;
         var id = $scope.pokestops[i].id;
+        $scope.name = $scope.pokestops[i].name;
         var marker = {
-          id: id,
-          icon: pokeBall,
-          coords: {latitude: templat, longitude: templng}
+          'id': id,
+          latitude: templat,
+          longitude: templng,
+          title: "Hi Ben",
+          icon: pokeStop,
         }
-        $scope.map.markers.push(marker)
+        $scope.map.markers.push(marker);
       }
     })
-    // var markers = [{latitude: 37.773972, longitude: -122.431297}]
+
   $scope.map={
     center: {
       latitude: 37.773972,
       longitude: -122.431297
     },
-    zoom: 12,
-    bounds: {},
+    control: {},
+    zoom: 13,
+    window: {
+      model: {},
+      show: false,
+      options: {}
+    },
     markers: [],
+    markersEvents: {
+      click: function(markers, eventName, model, args){
+        console.log("Click Marker Clicked");
+        $scope.map.window.model = model;
+        $scope.map.window.show = true;
+      }
+    },
+    options: {},
     events: {
       click: function (map, eventName, originalEventArgs){
         var e = originalEventArgs[0];
@@ -39,16 +62,9 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
         var marker = {
           id: Date.now(),
           icon: pokeBall,
-          coords: {
-            latitude: lat,
-            longitude: lon
-          },
-           options: {
-             labelContent : 'HI BEN',
-             labelAnchor: "16 33",
-             labelClass: 'labelClass',
-             labelStyle: {opacity: 0.75}
-           }
+          latitude: lat,
+          longitude: lon,
+          title: "Hi Ben"
         };
         $scope.map.markers.push(marker);
         console.log(marker);
@@ -57,7 +73,9 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
     }
   }
 });
-
+//////////////////////
+//// LOGIN CTRL
+//////////////////////
 angular.module('myApp').controller('loginController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
@@ -86,7 +104,9 @@ angular.module('myApp').controller('loginController',
     };
 
 }]);
-
+//////////////////////
+//// LOGOUT CTRL
+//////////////////////
 angular.module('myApp').controller('logoutController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
@@ -102,7 +122,9 @@ angular.module('myApp').controller('logoutController',
     };
 
 }]);
-
+//////////////////////
+//// REGISTER CTRL
+//////////////////////
 angular.module('myApp').controller('registerController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {

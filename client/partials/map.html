@@ -1,20 +1,33 @@
 <!-- GOOGLE MAP -->
 <div class="angular-google-map-container" ng-controller="mapController">
   <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" options="options" events="map.events">
-    <!-- <marker position="San Francisco"></marker> -->
-    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" labelContent="m.labelContent"></ui-gmap-marker>
-  </ui-gmap-google-map>
-  <div ng-repeat="pokestop in pokestops">
-    Poke Stop: {{ pokestop.id }} {{ pokestop.location.coordinate }}
-  </div>
 
-<!-- END GOOGLE MAP -->
+    <ui-gmap-markers models="map.markers" idKey="'id'" coords="'self'" events="map.markersEvents" icon="'icon'">
+      <!-- <ui-gmap-window show="map.window.show" templateUrl="partials/info.html" templateParameter="map.window.model"
+      options="'options'">
+        <div>Pokestop: {{ title }}</div>
+      </ui-gmap-window> -->
+    </ui-gmap-markers>
+    <ui-gmap-window
+      show="map.window.show"
+      coords="map.window.model"
+      templateUrl="'info.html'"
+      templateParameter="map.window.model"
+      options="map.window.options"
+      ng-cloak>
+      </ui-gmap-window>
+  </ui-gmap-google-map>
 <!-- COMMENT BOX -->
-<div class="container comment-box">
-  <form method="post">
-    <textarea name="name" rows="6" cols="40" placeholder="Comment"></textarea><br>
-    <input type="submit" name="name" value="Submit" class="btn">
-  </form>
-</div>
+  <div class="container comment-box">
+    <form method="post">
+      <textarea name="name" rows="3" cols="40" placeholder="Comment" ng-model="text"></textarea><br>
+      <input type="submit" name="name" value="Submit" class="btn">
+    </form>
+  </div>
 <!-- END COMMENT BOX -->
+  <div class="container" ng-repeat="pokestop in pokestops | filter:search">
+    <ul>
+      <li><strong>Poke Stop:</strong> {{ pokestop.name }} <strong>Location:</strong> {{ pokestop.location.display_address[0] }}</li>
+    </ul>
+  </div>
 </div>
