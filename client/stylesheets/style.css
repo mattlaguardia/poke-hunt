@@ -1,5 +1,5 @@
 body {
-  background-color: #FFFFFE;
+  background-color: #FFFFE9;
 }
 .navbar-right {
   padding-right: 32px;
@@ -39,5 +39,28 @@ body {
   /*justify-content: center;*/
 }
 .selected {
-  background: #ddd;
+  background: #DDD;
+}
+.login-background-image {
+  background-image: url("https://ucarecdn.com/975263b1-7612-4af8-9b95-f33567d34c9c/Untitled2.png");
+  height: 700px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: ghostwhite;
+  background-color: #222;
+}
+.login-form {
+  background-color: rgba(51, 51, 51, .55);
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 25%;
+  top: 10%;
+  padding-bottom: 25px;
+  border-radius: 10px;
+}
+.login-button {
+  background-color: #D64D4D;
+  border-color: #D64D4D;
+  color: ghostwhite;
 }
