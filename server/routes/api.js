@@ -65,27 +65,6 @@ router.get('/status', function(req, res) {
 ///////////////////////
 //// POKEBALL POST
 ///////////////////////
-router.post('/pins', function(req, res){
-    var pokeball = req.body;
-    console.log(pokeball);
-
-    var newPokeball = new Pokeball ({
-      id: req.body.id,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
-      title: req.body.title
-    })
-    newPokeball.save(function(err){
-      console.log("SAVED!!");
-    })
-  })
-
-router.get('/pins', function(req, res){
-  Pokeball.find().exec(function(err, pokeballs){
-    if(err) { console.log("ERROR in GET /PINS api.js: " + err)}
-    res.send(pokeballs)
-  })
-})
 
 
 module.exports = router;

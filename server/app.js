@@ -71,6 +71,38 @@ app.get('/api', function(req, res) {
   });
 });
 
+app.get('/pins', function(req, res){
+  Pokeball.find().exec(function(err, pokeballs){
+    if(err) { console.log("ERROR in GET /PINS api.js: " + err)}
+    res.send(pokeballs).json({
+      status: true
+    })
+  })
+})
+
+
+app.post('/pins', function(req, res){
+    var pokeball = req.body;
+    console.log(pokeball);
+
+    var newPokeball = new Pokeball ({
+      id: req.body.id,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
+      title: req.body.title
+    })
+    newPokeball.save(function(err){
+      if(err){
+        console.log("ERROR: " + err);
+      }
+      res.send(newPokeball).json({
+        status: true
+      })
+      console.log("SAVED!!");
+    })
+  })
+
+
 var allowCrossDomain = function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');

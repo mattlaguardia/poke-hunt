@@ -11,6 +11,26 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
 //////////////////////////
 //// AJAX TO VARIABLE
 //////////////////////////
+  $http.get('http://localhost:3000/pins')
+    .then(function(response){
+      $scope.userpokestops = response.data;
+      // console.log($scope.userpokestops);
+
+      for(var i = 0; i < $scope.userpokestops.length; i++){
+        var userTempLat = $scope.userpokestops[i].latitude;
+        var userTempLng = $scope.userpokestops[i].longitude;
+        var userTitle = $scope.userpokestops[i].title;
+        var userId = $scope.userpokestops[i].id;
+        var pokeball = {
+          'id': userId,
+          latitude: userTempLat,
+          longitude: userTempLng,
+          title: userTitle,
+          icon: pokeBall
+        }
+        $scope.map.savedpokeballs.push(pokeball);
+      }
+    })
   $http.get('http://localhost:3000/api')
     .then(function(response){
       $scope.pokestops = response.data[0];
@@ -40,15 +60,11 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
     control: {},
     zoom: 13,
     window: {
-      model: {},
-      pokeball: {},
-      show: false,
-      options: {}
+      show: false
     },
     markers: [],
     markersEvents: {
       click: function(markers, eventName, model, args){
-        console.log("Click Marker Clicked");
         $scope.map.window.model = model;
         $scope.map.window.show = true;
       }
@@ -59,12 +75,18 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
         $scope.map.window.show = true;
       }
     },
+    savedpokeballsEvents: {
+      click: function(savedpokeballs, eventName, model, args){
+        $scope.map.window.savedpokeballs = model;
+        $scope.map.window.show = true;
+      }
+    },
     options: {},
+    savedpokeballs: [],
     pokeballs: [],
     events: {
       click: function (map, eventName, originalEventArgs){
         var e = originalEventArgs[0];
-        // console.log(e);
         var lat = e.latLng.lat();
         var lon = e.latLng.lng();
         var marker = {
@@ -74,15 +96,7 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
           longitude: lon,
           title: "Pokemon"
         };
-
-        // add funtionality for customizing pokeball here //
-        // save information to the data base //
-        // lat and long //
-        // user input of pokemon that is caught //
-
-
         $scope.map.pokeballs.push(marker);
-        // $scope.map.pokeballs.push(pokeballInfo);
         $scope.$apply();
       }
     }
@@ -103,21 +117,22 @@ angular.module('myApp').controller('pokeballController', ["$scope", "$http", fun
     $scope.pokeball = $scope.newPokeball.title;
     $scope.parameter.latitude = $scope.newPokeball.latitude;
     $scope.parameter.longitude = $scope.newPokeball.longitude;
-    console.log($scope.newPokeball);
+    // console.log($scope.newPokeball);
 
-    $http.post('http://localhost:3000/user/pins', $scope.newPokeball)
+    $http.get('http://localhost:3000/pins')
+    .success(function(response){
+      $scope.pokeballs = response.data;
+      // console.log("GET REQ from HTTP: " + response.data);
+    })
+    .error(function(err){
+      console.log("ERROR in GET ANGULAR: " + err)
+    })
+    $http.post('http://localhost:3000/pins', $scope.newPokeball)
       .success(function(response){
-        console.log("posted to db!!");
-        $scope.pokemon.push(response.data);
-        $scope.newPokeball = {};
+        console.log("POSTED TO DB!");
       })
       .error(function(err){
-        console.log("ERROR IS: " + err)
-      })
-    $http.get('http://localhost:3000/user/pins')
-      .then(function(response){
-        $scope.pokeballs = response.data;
-        console.log("GET REQ from HTTP: " + response.data);
+        console.log("ERROR IS IN CONTROLLER.JS: " + err)
       })
   }
 }]);
@@ -200,9 +215,3 @@ angular.module('myApp').controller('registerController',
       });
     };
 }]);
-
-
-
-///////////////////////
-//// LOGGED IN ?
-///////////////////////
