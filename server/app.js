@@ -52,7 +52,7 @@ app.get('/', function(req, res) {
 app.get('/api', function(req, res) {
   var yb = [];
   var yelp = new Yelp({
-    consumer_key: ENV["consumer_secret"],
+    consumer_key: ENV["consumer_key"],
     consumer_secret: ENV["consumer_secret"],
     token: ENV["token"],
     token_secret: ENV["token_secret"],
