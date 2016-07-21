@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var bodyParser = require('body-parser');
 var passport = require('passport');
 var User = require('../models/user.js');
+var Pokeball = require('../models/pins');
+
 
 router.post('/register', function(req, res) {
   User.register(new User({ username: req.body.username }),
@@ -59,6 +62,9 @@ router.get('/status', function(req, res) {
     status: true
   });
 });
+///////////////////////
+//// POKEBALL POST
+///////////////////////
 
 
 module.exports = router;

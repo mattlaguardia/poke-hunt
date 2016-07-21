@@ -16,12 +16,10 @@ mongoose.connect('mongodb://localhost/poke-hunt');
 
 // user schema/model
 var User = require('./models/user.js');
+var Pokeball = require('./models/pins.js');
 
 // create instance of express
 var app = express();
-// connect to db models
-// var db = require('./models');
-// require routes
 var routes = require('./routes/api.js');
 
 // define middleware
@@ -51,21 +49,6 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'));
 });
 
-error hndlers
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-app.use(function(err, req, res) {
-  res.status(err.status || 500);
-  res.end(JSON.stringify({
-    message: err.message,
-    error: {}
-  }));
-});
-
 app.get('/api', function(req, res) {
   var yb = [];
   var yelp = new Yelp({
@@ -76,7 +59,7 @@ app.get('/api', function(req, res) {
   });
 
   // See http://www.yelp.com/developers/documentation/v2/search_api
-  yelp.search({ term: 'pokestop', location: 'San Francisco' })
+  yelp.search({ term: 'pokestop', location: 'San Francisco'})
   .then(function (data) {
     temp = data.businesses;
     yb.push(temp);
@@ -87,6 +70,54 @@ app.get('/api', function(req, res) {
     console.error(err);
   });
 });
+
+app.get('/pins', function(req, res){
+  Pokeball.find().exec(function(err, pokeballs){
+    if(err) { console.log("ERROR in GET /PINS api.js: " + err)}
+    res.send(pokeballs).json({
+      status: true
+    })
+  })
+})
+
+
+app.post('/pins', function(req, res){
+    var pokeball = req.body;
+    console.log(pokeball);
+
+    var newPokeball = new Pokeball ({
+      id: req.body.id,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
+      title: req.body.title
+    })
+    newPokeball.save(function(err){
+      if(err){
+        console.log("ERROR: " + err);
+      }
+      res.send(newPokeball).json({
+        status: true
+      })
+      console.log("SAVED!!");
+    })
+  })
+
+
+var allowCrossDomain = function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+
+app.use(allowCrossDomain);
 
 
 module.exports = app;

@@ -22,14 +22,16 @@ angular.module('myApp').factory('AuthService',
       }
     }
 
-    function getUserStatus() {
+    function getUserStatus($scope) {
       return $http.get('/user/status')
       // handle success
       .success(function (data) {
         if(data.status){
           user = true;
+          // $scope.userStatus = user;
         } else {
           user = false;
+          // $scope.userStatus = user;
         }
       })
       // handle error
@@ -68,7 +70,6 @@ angular.module('myApp').factory('AuthService',
     }
 
     function logout() {
-
       // create a new instance of deferred
       var deferred = $q.defer();
 
@@ -84,17 +85,13 @@ angular.module('myApp').factory('AuthService',
           user = false;
           deferred.reject();
         });
-
       // return promise object
       return deferred.promise;
-
     }
 
     function register(username, password) {
-
       // create a new instance of deferred
       var deferred = $q.defer();
-
       // send a post request to the server
       $http.post('/user/register',
         {username: username, password: password})
@@ -110,10 +107,7 @@ angular.module('myApp').factory('AuthService',
         .error(function (data) {
           deferred.reject();
         });
-
       // return promise object
       return deferred.promise;
-
     }
-
 }]);
