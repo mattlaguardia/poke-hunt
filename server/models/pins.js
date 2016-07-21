@@ -9,6 +9,4 @@ var Pokeball = new Schema({
   title: String
 });
 
-Pokeball.plugin(passportLocalMongoose);
-
-module.exports = mongoose.model('pokeballs', Pokeball);
+module.exports = mongoose.model('pokeball', Pokeball);

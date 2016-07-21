@@ -1,0 +1,11 @@
+<div class="pokeball-info" ng-controller="pokeballController">
+  <center><h4>Pokemon Caught:</h4>
+  <h5>{{pokeball}}</h5></center>
+  <form class="form-inline" ng-submit="addPokeball()">
+    <input class="form-control" ng-model="newPokeball.title">
+    <input type="hidden" ng-model="newPokeball.id" value="{{parameter.id}}" ng-init="newPokeball.id=parameter.id">
+    <input type="hidden" ng-model="newPokeball.latitude" value="{{parameter.latitude}}" ng-init="newPokeball.latitude=parameter.latitude">
+    <input type="hidden" ng-model="newPokeball.longitude" value="{{parameter.longitude}}" ng-init="newPokeball.longitude=parameter.longitude">
+    <input type="submit" value="Place Pokeball" class="btn btn-sm btn-block submit-button">
+  </form>
+</div>

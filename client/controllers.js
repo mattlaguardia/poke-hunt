@@ -4,17 +4,17 @@
 angular.module("myApp").controller("mapController", function($scope, $http, $interval, uiGmapGoogleMapApi) {
 
   var pokeBall = {
-    url: 'http://vignette2.wikia.nocookie.net/pokemon/images/1/13/Poke_Ball_Sprite.png/revision/20151205192135'
+    url: 'https://ucarecdn.com/93345d4b-8c33-4858-a855-40333eeb84c7/pokeball.png'
   }
   var pokeStop = {url: "https://ucarecdn.com/7e2ebe0a-cfe6-470b-b2fd-c474f124b0c4/pokestopnew.png"}
-  
+
 //////////////////////////
 //// AJAX TO VARIABLE
 //////////////////////////
   $http.get('http://localhost:3000/api')
     .then(function(response){
       $scope.pokestops = response.data[0];
-      console.log($scope.pokestops)
+      // console.log($scope.pokestops)
 
       for(var i = 0; i < $scope.pokestops.length; i++){
         var templat = $scope.pokestops[i].location.coordinate.latitude;
@@ -32,7 +32,6 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
         $scope.map.markers.push(marker);
       }
     })
-
   $scope.map={
     center: {
       latitude: 37.773972,
@@ -42,6 +41,7 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
     zoom: 13,
     window: {
       model: {},
+      pokeball: {},
       show: false,
       options: {}
     },
@@ -53,27 +53,76 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
         $scope.map.window.show = true;
       }
     },
+    pokeballEvents: {
+      click: function(pokeballs, eventName, model, args){
+        $scope.map.window.pokeball = model;
+        $scope.map.window.show = true;
+      }
+    },
     options: {},
+    pokeballs: [],
     events: {
       click: function (map, eventName, originalEventArgs){
         var e = originalEventArgs[0];
+        // console.log(e);
         var lat = e.latLng.lat();
         var lon = e.latLng.lng();
         var marker = {
-          id: "Pokemon Caught ID: " + Date.now(),
+          id: "ID: " + Date.now(),
           icon: pokeBall,
           latitude: lat,
           longitude: lon,
-          title: "Hi Ben"
+          title: "Pokemon"
         };
-        $scope.map.markers.push(marker);
-        console.log(marker);
+
+        // add funtionality for customizing pokeball here //
+        // save information to the data base //
+        // lat and long //
+        // user input of pokemon that is caught //
+
+
+        $scope.map.pokeballs.push(marker);
+        // $scope.map.pokeballs.push(pokeballInfo);
         $scope.$apply();
       }
     }
   }
 })
-.controller('templateController', function(){});
+.controller('templateController', function(){})
+
+//////////////////////////
+//// POKEBALL CONTROLLER
+//////////////////////////
+angular.module('myApp').controller('pokeballController', ["$scope", "$http", function($scope, $http){
+  $scope.pokeball = 'Ben-Jammin-Puff';
+  $scope.selection = true;
+  $scope.newPokeball = {};
+
+  $scope.addPokeball = function(){
+    // console.log($scope.newPokeball);
+    $scope.pokeball = $scope.newPokeball.title;
+    $scope.parameter.latitude = $scope.newPokeball.latitude;
+    $scope.parameter.longitude = $scope.newPokeball.longitude;
+    console.log($scope.newPokeball);
+
+    $http.post('http://localhost:3000/user/pins', $scope.newPokeball)
+      .success(function(response){
+        console.log("posted to db!!");
+        $scope.pokemon.push(response.data);
+        $scope.newPokeball = {};
+      })
+      .error(function(err){
+        console.log("ERROR IS: " + err)
+      })
+    $http.get('http://localhost:3000/user/pins')
+      .then(function(response){
+        $scope.pokeballs = response.data;
+        console.log("GET REQ from HTTP: " + response.data);
+      })
+  }
+}]);
+
+
 //////////////////////
 //// LOGIN CTRL
 //////////////////////
@@ -138,7 +187,7 @@ angular.module('myApp').controller('registerController',
       AuthService.register($scope.registerForm.username, $scope.registerForm.password)
         // handle success
         .then(function () {
-          $location.path('/login');
+          $location.path('/');
           $scope.disabled = false;
           $scope.registerForm = {};
         })
@@ -151,13 +200,9 @@ angular.module('myApp').controller('registerController',
       });
     };
 }]);
+
+
+
 ///////////////////////
 //// LOGGED IN ?
 ///////////////////////
-// angular.module('myApp').controller('loggedController', function($scope, AuthService){
-//   if(user){
-//     $scope.user = true;
-//   } else {
-//     $scope.user = false;
-//   }
-// });

@@ -7,35 +7,56 @@
       </p>
     </div>
   </nav>
+<div>
 <!-- GOOGLE MAP -->
 <div class="angular-google-map-container" ng-controller="mapController">
   <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" options="options" events="map.events">
-
-    <ui-gmap-markers models="map.markers" idKey="'id'" coords="'self'" events="map.markersEvents" icon="'icon'">
+    <ui-gmap-markers
+      models="map.markers"
+      idKey="'id'"
+      coords="'self'"
+      events="map.markersEvents"
+      icon="'icon'"
+      show="true">
+      <ui-gmap-window
+        show="map.window.show"
+        coords="map.window.model"
+        templateUrl="'info.html'"
+        templateParameter="map.window.model"
+        options="map.window.options"
+        ng-cloak>
+        </ui-gmap-window>
     </ui-gmap-markers>
-    <ui-gmap-window
-      show="map.window.show"
-      coords="map.window.model"
-      templateUrl="'info.html'"
-      templateParameter="map.window.model"
-      options="map.window.options"
-      ng-cloak>
-      </ui-gmap-window>
+    <ui-gmap-markers
+      models="map.pokeballs"
+      idKey="'id'"
+      coords="'self'"
+      events="map.pokeballEvents"
+      icon="'icon'"
+      show="true">
+      <ui-gmap-window
+        show="map.window.show"
+        coords="map.window.pokeball"
+        templateUrl="'./partials/_pokeballView.html'"
+        templateParameter="map.window.pokeball"
+        options="map.window.options"
+        ng-cloak>
+        </ui-gmap-window>
+    </ui-gmap-markers>
+
+
   </ui-gmap-google-map>
 <!-- COMMENT BOX -->
-
   <div class="form-inline comment-box">
-    <form class="form-inline" method="post">
+    <form class="form-inline">
       <div class="form-group">
-        <input class="form-control" placeholder="Pokemon Caught" ng-model="text"></input>
-        <input class="form-control" placeholder="Comment" ng-model="text"></input>
+        <input class="form-control" placeholder="Comment" ng-model='chat'></input>
       </div>
       <div class="form-group">
         <input type="submit" name="name" value="Submit" class="btn submit-button"></input>
       </div>
     </form>
   </div>
-
 <!-- END COMMENT BOX -->
 <div class="container pokestops-list">
   <div class="pokestop" ng-repeat="pokestop in map.markers" ng-class="{selected: pokestop == map.window.model}" ng-click="map.window.model = pokestop">
@@ -44,5 +65,5 @@
     </div>
   </div>
 </div>
-
+</div>
 </div>

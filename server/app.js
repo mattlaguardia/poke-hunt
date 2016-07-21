@@ -16,6 +16,7 @@ mongoose.connect('mongodb://localhost/poke-hunt');
 
 // user schema/model
 var User = require('./models/user.js');
+var Pokeball = require('./models/pins.js');
 
 // create instance of express
 var app = express();
@@ -69,6 +70,22 @@ app.get('/api', function(req, res) {
     console.error(err);
   });
 });
+
+var allowCrossDomain = function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+
+app.use(allowCrossDomain);
 
 
 module.exports = app;
