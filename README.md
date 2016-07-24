@@ -3,6 +3,8 @@
 ## Welcome
 Wecome to poke-hunt.io (alpha) the place to see where the users are able to share whate pokemon they are catching and where! You are also able to locate some nearby pokestops thanks to yelp's api who is providing those places!
 
+Checkout the alpha [here](https://powerful-taiga-84139.herokuapp.com/)
+
 ![image](https://ucarecdn.com/f8a8e4cf-e4c0-43b8-b25a-4dcd8993e528/image1.png)
 
 ![image](https://ucarecdn.com/e2073171-d38c-4067-82de-af327f65c9b9/image2.png)
