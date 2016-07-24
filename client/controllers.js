@@ -119,7 +119,7 @@ angular.module('myApp').controller('pokeballController', ["$scope", "$http", fun
     $scope.parameter.longitude = $scope.newPokeball.longitude;
     // console.log($scope.newPokeball);
 
-    $http.get('http://localhost:5000/pins')
+    $http.get('https://powerful-taiga-84139.herokuapp.com/pins')
     .success(function(response){
       $scope.pokeballs = response.data;
       // console.log("GET REQ from HTTP: " + response.data);
@@ -127,7 +127,7 @@ angular.module('myApp').controller('pokeballController', ["$scope", "$http", fun
     .error(function(err){
       console.log("ERROR in GET ANGULAR: " + err)
     })
-    $http.post('http://localhost:5000/pins', $scope.newPokeball)
+    $http.post('https://powerful-taiga-84139.herokuapp.com/pins', $scope.newPokeball)
       .success(function(response){
         console.log("POSTED TO DB!");
       })
