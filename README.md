@@ -1,7 +1,7 @@
 # Poke-hunt
 
 ## Welcome
-Wecome to poke-hunt.io the place to see where the users are able to share whate pokemon they are catching and where! You are also able to locate some nearby pokestops thanks to yelp's api who is providing those places!
+Wecome to poke-hunt.io (alpha) the place to see where the users are able to share whate pokemon they are catching and where! You are also able to locate some nearby pokestops thanks to yelp's api who is providing those places!
 
 ![image](https://ucarecdn.com/f8a8e4cf-e4c0-43b8-b25a-4dcd8993e528/image1.png)
 
@@ -16,6 +16,13 @@ Wecome to poke-hunt.io the place to see where the users are able to share whate 
 Check out user stories [here](https://trello.com/b/DDtdZ7p7/project-3-final-project).
 
 ## Technlologies
+ - MEAN Stack
+ - Yelp API
+ - Google Maps Api 
+ - Angular Gmal ui directive
 
+## Next Steps
+	- timestaps for time pokeball was posted
+	- websockets for db updates
 
 ## Shoutouts
