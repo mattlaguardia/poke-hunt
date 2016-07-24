@@ -11,7 +11,7 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
 //////////////////////////
 //// AJAX TO VARIABLE
 //////////////////////////
-  $http.get('http://localhost:5000/pins')
+  $http.get('https://powerful-taiga-84139.herokuapp.com/pins')
     .then(function(response){
       $scope.userpokestops = response.data;
       // console.log($scope.userpokestops);
@@ -31,7 +31,7 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
         $scope.map.savedpokeballs.push(pokeball);
       }
     })
-  $http.get('http://localhost:5000/api')
+  $http.get('https://powerful-taiga-84139.herokuapp.com/api')
     .then(function(response){
       $scope.pokestops = response.data[0];
       // console.log($scope.pokestops)
