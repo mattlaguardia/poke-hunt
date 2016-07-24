@@ -2,7 +2,7 @@ var myApp = angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps']);
 
 myApp.config(function (uiGmapGoogleMapApiProvider, $routeProvider) {
   uiGmapGoogleMapApiProvider.configure({
-        key: '...',
+        key: gmap,
         v: '3.20',
         libraries: 'weather,geometry,visualization'
     });

@@ -11,7 +11,7 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
 //////////////////////////
 //// AJAX TO VARIABLE
 //////////////////////////
-  $http.get('http://localhost:3000/pins')
+  $http.get('http://localhost:5000/pins')
     .then(function(response){
       $scope.userpokestops = response.data;
       // console.log($scope.userpokestops);
@@ -31,7 +31,7 @@ angular.module("myApp").controller("mapController", function($scope, $http, $int
         $scope.map.savedpokeballs.push(pokeball);
       }
     })
-  $http.get('http://localhost:3000/api')
+  $http.get('http://localhost:5000/api')
     .then(function(response){
       $scope.pokestops = response.data[0];
       // console.log($scope.pokestops)
@@ -119,7 +119,7 @@ angular.module('myApp').controller('pokeballController', ["$scope", "$http", fun
     $scope.parameter.longitude = $scope.newPokeball.longitude;
     // console.log($scope.newPokeball);
 
-    $http.get('http://localhost:3000/pins')
+    $http.get('http://localhost:5000/pins')
     .success(function(response){
       $scope.pokeballs = response.data;
       // console.log("GET REQ from HTTP: " + response.data);
@@ -127,7 +127,7 @@ angular.module('myApp').controller('pokeballController', ["$scope", "$http", fun
     .error(function(err){
       console.log("ERROR in GET ANGULAR: " + err)
     })
-    $http.post('http://localhost:3000/pins', $scope.newPokeball)
+    $http.post('http://localhost:5000/pins', $scope.newPokeball)
       .success(function(response){
         console.log("POSTED TO DB!");
       })

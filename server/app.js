@@ -10,9 +10,10 @@ var path = require('path');
 var passport = require('passport');
 var localStrategy = require('passport-local' ).Strategy;
 var Yelp = require('yelp');
+var yelp = require('./api_keys')
 
 // mongoose
-mongoose.connect('mongodb://localhost/poke-hunt');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://heroku_032mdhjd:d50j8merjoabgm2pfk4a31sjmt@ds027165.mlab.com:27165/heroku_032mdhjd');
 
 // user schema/model
 var User = require('./models/user.js');
@@ -51,12 +52,7 @@ app.get('/', function(req, res) {
 
 app.get('/api', function(req, res) {
   var yb = [];
-  var yelp = new Yelp({
-    consumer_key: '...',
-    consumer_secret: '...',
-    token: '...',
-    token_secret: '...',
-  });
+
 
   // See http://www.yelp.com/developers/documentation/v2/search_api
   yelp.search({ term: 'pokestop', location: 'San Francisco'})
